@@ -111,7 +111,7 @@ margin-left: 4px;
 }
 
 .check{
-   
+    display:none;
 }
 .brand_logo_container {
     position: absolute;
