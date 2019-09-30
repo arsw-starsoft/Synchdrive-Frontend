@@ -1,0 +1,52 @@
+.sidebar{
+    background-image: url('/imagenes/fondo.gif');
+}
+.img-circle-off{
+    width: 30%;
+    height: 30%;
+    margin:auto;
+    transition: tratransform 0.2s;
+}
+.img-circle-on{
+    width: 35%;
+    height: 35%;
+    margin:auto;
+    transition: tratransform 0.2s;
+    transform: scale(1.5);
+
+}
+.img-circle-off:hover{
+    transform: scale(1.5)
+}
+
+.check{
+    display:none;
+}
+.brand_logo_container {
+    position: absolute;
+    height: 170px;
+    width: 170px;
+    top: -75px;
+    border-radius: 50%;
+    background: #60a3bc;
+    padding: 10px;
+    text-align: center;
+}
+.brand_logo {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+.imgRedonda-on {
+    width:50%;
+    height:50%;
+    border-radius:100%;
+    border:3px solid white;
+}
+.imgRedonda-off {
+    width:50%;
+    height:50%;
+    border-radius:100%;
+
+}
