@@ -15,7 +15,9 @@
         integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <!--Custom styles-->
     <link rel="stylesheet" type="text/css" href="css/loginAndRegister.css">
-    
+    <script src="/js/check.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body onload="selectAnos()">
@@ -33,21 +35,27 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
-                            <input type="text" class="form-control" placeholder="Nombre">
+                            <input type="text" id="nombre" class="form-control" placeholder="Nombre">
                         </div>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                             </div>
-                            <input type="email" class="form-control" placeholder="name@example.com">
+                            <input type="email" id="correo" class="form-control" placeholder="name@example.com">
                         </div>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
-                            <input type="password" class="form-control" placeholder="password">
+                            <input type="password" id="contrasena" class="form-control" placeholder="password">
                         </div>
                         <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-mobile"></i></span>
+                            </div>
+                            <input type="text" id="cell" class="form-control" placeholder="cell">
+                        </div>
+                        <!--<div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-car"></i></span>
                             </div>
@@ -63,7 +71,7 @@
                                 <span class="input-group-text"><i class="fa fa-address-card"></i></span>
                             </div>
                             <input type="text" class="form-control" placeholder="ABC-123">
-                        </div>
+                        </div>-->
                         <!--<div class="row align-items-center remember">
                             <div class="col-md-12">VINCULAR CUENTAS:
                             </div>
@@ -85,7 +93,7 @@
 
                         <div class="form-group">
                                 <center>
-                                    <input type="button" value="sign in" class="btn float-none login_btn" onclick="probar()">
+                                    <input type="button" value="sign in" class="btn float-none login_btn" onclick="addDriver()">
                                 </center>
                             </div>
                     </form>
