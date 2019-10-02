@@ -57,3 +57,6 @@ var addDriver = function () {
             })
     }
 }
+var getUserData = function() {
+    console.log("ALL COOKIES: " + window.Cookies);
+}

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Register User Page</title>
+    <title>Register Driver  Page</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -15,12 +15,13 @@
         integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <!--Custom styles-->
     <link rel="stylesheet" type="text/css" href="css/loginAndRegister.css">
+    <script src="/js/check.js"></script>
     <script src="/js/app.js"></script>
     <script src="/js/apiClient.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
-<body>
+<body onload="selectAnos()">
     <div class="container">
         <div class="d-flex justify-content-center h-100">
             <div class="card">
@@ -35,7 +36,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
-                            <input type="text" id="nombre"class="form-control" placeholder="Nombre">
+                            <input type="text" id="nombre" class="form-control" placeholder="Nombre">
                         </div>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
@@ -49,6 +50,29 @@
                             </div>
                             <input type="password" id="contrasena" class="form-control" placeholder="password">
                         </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-mobile"></i></span>
+                            </div>
+                            <input type="text" id="cell" class="form-control" placeholder="cell">
+                        </div>
+                        <!--<div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-car"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Modelo">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                            </div>
+                            <select class="form-control" id="year">
+                              </select>
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-address-card"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="ABC-123">
+                        </div>-->
                         <!--<div class="row align-items-center remember">
                             <div class="col-md-12">VINCULAR CUENTAS:
                             </div>
@@ -70,7 +94,7 @@
 
                         <div class="form-group">
                                 <center>
-                                    <input type="button" value="sign in" class="btn float-none login_btn" onclick="app.addUser()">
+                                    <input type="button" value="Sign Up" class="btn float-none login_btn" onclick="app.registroConductor()">
                                 </center>
                             </div>
                     </form>
