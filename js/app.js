@@ -11,10 +11,22 @@ app = (function () {
         sessionStorage.setItem('token',"Bearer "+data["token"])
         sessionStorage.setItem('email',email)
         console.log(sessionStorage.getItem('token'))
-        apiclient.consultarUsuario(sessionStorage.getItem('email'),sessionStorage.getItem('token'))
         alert("Ha sido Login exitosamente");
         location.href = "perfilUser.html";
-       
+        
+    }
+    var cargarDatos= function (data) {
+        apiclient.consultarUsuario(sessionStorage.getItem('email'),sessionStorage.getItem('token'),actualizarPerfil)
+    }
+    var actualizarPerfil=function(funcion){
+        $("#UserName").val(funcion["userName"]);
+        $("#Email").val(funcion["email"]);
+        $("#FirstName").val(funcion["firstName"]);
+        $("#LastName").val(funcion["lastName"]);
+        $("#CellPhone").val(funcion["cellPhone"]);
+        $("#telefono").text(funcion["cellPhone"]);
+        $("#nombre").text(funcion["userName"]);
+        $("#correo").text(funcion["email"]);
     }
     var onErrorLogin = function (data) {
         alert("No se pudo realizar el login correctamente");
@@ -42,21 +54,6 @@ app = (function () {
     },
 
 
-
-
-        loginUserAndConductor: function (name) {
-            var user = {
-                "email": $('#correo').val(),
-                "password": $('#contrasena').val(),
-            };
-            user = JSON.stringify(user); //parsea a formato JSON
-            if(console.log(document.getElementsByName('Tusuario')[0].checked)){
-
-            }else if(console.log(document.getElementsByName('Tusuario')[1].checked)){
-
-            }
-        },
-
         /*
             FUNCIONES DE REGISTRO
         */
@@ -83,7 +80,8 @@ app = (function () {
             conductor = JSON.stringify(conductor); //parsea a formato JSON
             return apiclient.registroConductor(conductor, onSucessRegistro,
                 onErrorRegistro);
-        }
+        },
+        cargarDatos:cargarDatos
     }
 })();
 function tokenSet(){

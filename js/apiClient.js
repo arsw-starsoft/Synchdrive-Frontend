@@ -36,7 +36,7 @@ apiclient=(function(){
 				error: err
 			});
 		},
-		consultarUsuario:function(user,token){
+		consultarUsuario:function(user,token,callback){
 			console.log(user)
 			$.ajax({
 				method: "GET",
@@ -44,7 +44,7 @@ apiclient=(function(){
 				url: "https://synchdrive.herokuapp.com/users/"+user,
 				headers: { "Authorization": token},
 				success: function(respuesta) {
-					console.log(respuesta);
+					callback(respuesta)
 				},
 				error: function() {
 					console.log("No se ha podido obtener la información");
