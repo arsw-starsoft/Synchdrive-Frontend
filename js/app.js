@@ -15,6 +15,11 @@ app = (function () {
         location.href = "perfilUser.html";
         
     }
+    var LogOut=function (data) {
+        sessionStorage.clear('token');
+        sessionStorage.clear('email');
+        location.href = "loginUser.html";
+    }
     var cargarDatos= function (data) {
         apiclient.consultarUsuario(sessionStorage.getItem('email'),sessionStorage.getItem('token'),actualizarPerfil)
     }
@@ -81,21 +86,7 @@ app = (function () {
             return apiclient.registroConductor(conductor, onSucessRegistro,
                 onErrorRegistro);
         },
-        cargarDatos:cargarDatos
+        cargarDatos:cargarDatos,
+        LogOut:LogOut
     }
 })();
-function tokenSet(){
-    return "Bearer " + token; //deja el token con 'bearer' para el back
-}
-
-function consultarApi(){
-    token = tokenSet();
-    console.log(token);
-    $.ajax({
-        type: "GET",
-        url: "http://localhost:8080/cars",
-        headers: { "Authorization": token} //Header de autorización
-      }).done(function(data){
-          console.log(data);
-      });
-}
