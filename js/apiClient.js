@@ -35,6 +35,20 @@ apiclient=(function(){
 				success: succ,
 				error: err
 			});
-		}
-	}
+		},
+		consultarUsuario:function(user,token){
+			console.log(user)
+			$.ajax({
+				method: "GET",
+				contentType: "application/json",
+				url: "https://synchdrive.herokuapp.com/users/"+user,
+				headers: { "Authorization": token},
+				success: function(respuesta) {
+					console.log(respuesta);
+				},
+				error: function() {
+					console.log("No se ha podido obtener la información");
+				}
+			});
+	}}
 })();

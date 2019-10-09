@@ -1,15 +1,20 @@
   
-var token;
+
 app = (function () {
     // PROMESAS DEL REGISTRO
+    var email; 
     var onSucessRegistro = function (data) {
         alert("Ha sido registrado exitosamente");
-        location.href = "login.html";
+        location.href = "loginUser.html";
     }
     var onSucessLoing = function (data) {
+        sessionStorage.setItem('token',"Bearer "+data["token"])
+        sessionStorage.setItem('email',email)
+        console.log(sessionStorage.getItem('token'))
+        apiclient.consultarUsuario(sessionStorage.getItem('email'),sessionStorage.getItem('token'))
         alert("Ha sido Login exitosamente");
         location.href = "perfilUser.html";
-        
+       
     }
     var onErrorLogin = function (data) {
         alert("No se pudo realizar el login correctamente");
@@ -31,9 +36,7 @@ app = (function () {
             "password": $('#contrasena').val(),
         };
         loginData = JSON.stringify(loginData);
-        console.log(loginData)
-        console.log(loginData)
-        console.log(loginData)
+        email=$('#correo').val();
         return apiclient.loginUser(loginData, onSucessLoing,
             onErrorLogin);
     },
