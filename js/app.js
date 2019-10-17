@@ -1,29 +1,45 @@
-  
+
 
 app = (function () {
     // PROMESAS DEL REGISTRO
-    var email; 
+    var email;
+    var check_session = function () {
+       
+            var user = readCookie("nickname");
+            if (user == null ){
+                alert("Permiso denegado, debe logearse primero.")
+                location.href = "/index.html"
+            }
+    };
+
     var onSucessRegistro = function (data) {
         alert("Ha sido registrado exitosamente");
         location.href = "loginUser.html";
     }
     var onSucessLoing = function (data) {
-        sessionStorage.setItem('token',"Bearer "+data["token"])
-        sessionStorage.setItem('email',email)
+        sessionStorage.setItem('token', "Bearer " + data["token"])
+        sessionStorage.setItem('email', email)
         console.log(sessionStorage.getItem('token'))
         alert("Ha sido Login exitosamente");
         location.href = "perfilUser.html";
-        
+
     }
-    var LogOut=function (data) {
+    var LogOut = function (data) {
         sessionStorage.clear('token');
         sessionStorage.clear('email');
         location.href = "loginUser.html";
     }
-    var cargarDatos= function (data) {
-        apiclient.consultarUsuario(sessionStorage.getItem('email'),sessionStorage.getItem('token'),actualizarPerfil)
+    var cargarDatos = function (data) {
+        console.log(console.log(sessionStorage.getItem('email')))
+        if (sessionStorage.getItem('email') == null ){
+            alert("Permiso denegado, debe logearse primero.")
+            location.href = "/loginUser.html"
+        }else{
+            apiclient.consultarUsuario(sessionStorage.getItem('email'), sessionStorage.getItem('token'), actualizarPerfil)
+        }
+      
     }
-    var actualizarPerfil=function(funcion){
+    var actualizarPerfil = function (funcion) {
         $("#UserName").val(funcion["userName"]);
         $("#Email").val(funcion["email"]);
         $("#FirstName").val(funcion["firstName"]);
@@ -35,7 +51,7 @@ app = (function () {
     }
     var onErrorLogin = function (data) {
         alert("No se pudo realizar el login correctamente");
-        
+
     }
 
     var onErrorRegistro = function (data) {
@@ -47,16 +63,16 @@ app = (function () {
         /*
             FUNCIONES DE LOGIN
         */
-       login:function (name){
-        var loginData = {
-            "username": $('#correo').val(),
-            "password": $('#contrasena').val(),
-        };
-        loginData = JSON.stringify(loginData);
-        email=$('#correo').val();
-        return apiclient.loginUser(loginData, onSucessLoing,
-            onErrorLogin);
-    },
+        login: function (name) {
+            var loginData = {
+                "username": $('#correo').val(),
+                "password": $('#contrasena').val(),
+            };
+            loginData = JSON.stringify(loginData);
+            email = $('#correo').val();
+            return apiclient.loginUser(loginData, onSucessLoing,
+                onErrorLogin);
+        },
 
 
         /*
@@ -86,7 +102,8 @@ app = (function () {
             return apiclient.registroConductor(conductor, onSucessRegistro,
                 onErrorRegistro);
         },
-        cargarDatos:cargarDatos,
-        LogOut:LogOut
+        cargarDatos: cargarDatos,
+        LogOut: LogOut,
+        check_session: check_session
     }
 })();
