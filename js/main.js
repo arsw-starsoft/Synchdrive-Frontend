@@ -1,62 +1,34 @@
-var addUser = function () {
-    var nombreI = document.getElementById("nombre").value;
-    var correoI = document.getElementById("correo").value;
-    var contrasenaI = document.getElementById("contrasena").value;
-    console.log(nombreI);
-    console.log(correoI);
-    console.log(contrasenaI);
-    if (nombreI == "" || correoI == "" || contrasenaI == "") {
-        alert("Diligencie Completamente Los Datos");
-    } else {
-        //axios.post('http://localhost:8086/cats/usuario', {
-        axios.post('https://synchdrive.herokuapp.com/users', {
-            email: correoI,
-            userName: nombreI,
-            password: contrasenaI,
-        })
-            .then(function (response) {
-                window.location.assign('login.html')
+appMapa = (function () {
 
-            })
-            .catch(function (error) {
-                swal({ title: '¡Error en el registro!', icon: 'error', text: 'Revisalo Porfa', type: 'success' }).then(function () {
-                    console.log("funciono inexistente")
-                })
-                console.log(error + ' No se logro hacer post')
-            })
-    }
-}
-var addDriver = function () {
-    var nombreI = document.getElementById("nombre").value;
-    var celularI = document.getElementById("cell").value;
-    var correoI = document.getElementById("correo").value;
-    var contrasenaI = document.getElementById("contrasena").value;
-    console.log(nombreI);
-    console.log(correoI);
-    console.log(contrasenaI);
-    console.log(celularI);
-    if (nombreI == "" || correoI == "" || contrasenaI == ""|| celularI == "") {
-        alert("Diligencie Completamente Los Datos");
-    } else {
-        //axios.post('http://localhost:8086/cats/usuario', {
-        axios.post('https://synchdrive.herokuapp.com/drivers', {
-            email: correoI,
-            userName: nombreI,
-            password: contrasenaI,
-            cellPhone: celularI,
-        })
-            .then(function (response) {
-                window.location.assign('login.html')
+    var cordenadaSuccess = function (position) {
+        var coordenadas = position.coords;
+        console.log('Tu posición actual es:');
+        console.log('Latitud : ' + coordenadas.latitude);
+        console.log('Longitud: ' + coordenadas.longitude);
+        console.log('Más o menos ' + coordenadas.accuracy + ' metros.');
+        L.marker([coordenadas.latitude,coordenadas.longitude]).addTo(map)
+        .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+        .openPopup();
+    };
 
-            })
-            .catch(function (error) {
-                swal({ title: '¡Error en el registro!', icon: 'error', text: 'Revisalo Porfa', type: 'success' }).then(function () {
-                    console.log("funciono inexistente")
-                })
-                console.log(error + ' No se logro hacer post')
-            })
+    var cordenadasError=function (error) {
+        console.warn('ERROR(' + error.code + '): ' + error.message);
+    };
+
+    return {
+        getCordenadas:function(name){
+            var options = {
+                enableHighAccuracy: true,
+                timeout: 6000,
+                maximumAge: 0
+              };
+            return navigator.geolocation.getCurrentPosition(cordenadaSuccess, cordenadasError, options);
+        }
+       
+
     }
-}
-var getUserData = function() {
-    console.log("ALL COOKIES: " + window.Cookies);
-}
+
+})();
+
+
+
