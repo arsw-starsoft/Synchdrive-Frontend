@@ -59,10 +59,112 @@
                 </ul>
             </div>
         </div>
-        <div class="main-panel">
-                <div id="map" style="width: 100%; height: 100%;"></div>
+        <div class="container-fluid" style="width: 55%; 
+        height: 15%;float: left; border:black;  
+        border-style: solid;
+        position: absolute ; left: 20%;">
+            <form>
+                <br>
+                <center>
+                    Destination: <input type="text">
+                    <input type="button" value="Search Service" class="btn float-none login_btn" onclick="">
+                </center>
+            </form>
+
         </div>
-        
+        <div class="container-fluid" style="width: 25%; 
+        height: 100%;float: left; 
+        border:black;  border-style: solid;
+        position: absolute;
+        left:75%;">
+            <form>
+                <br>
+                <center>
+                    Select Filters:
+                </center>
+
+                <br>
+                <center>
+                    Application:
+                    <div class="row">
+                        <br>
+                        <div class="col-md-2">
+                            <input type="checkbox" class="check" name="Tcuenta" value="1" id="beat"> Beat
+                            <!--<img src="/imagenes/Beat.png" alt="..." class="imgRedonda-off" id="beat-imagen"  onclick="checkCuentas(1)">-->
+                        </div>
+                        <div class="col-md-2">
+                            <input type="checkbox" class="check" name="Tcuenta" value="2" id="uber"> Uber
+                            <!--<img src="/imagenes/uber.png" alt="..."  class="imgRedonda-off" id="uber-imagen" onclick="checkCuentas(2)" >-->
+                        </div>
+                        <div class="col-md-2">
+                            <input type="checkbox" class="check" name="Tcuenta" value="3" id="didi"> Didi
+                            <!--<img src="/imagenes/Didi.png" alt="..." class="imgRedonda-off" id="didi-imagen" onclick="checkCuentas(3)">-->
+                        </div>
+
+                    </div>
+                </center>
+                
+                <br>
+                <center>
+                        Service:
+                </center>
+                <br>
+                <div class="row">
+                    
+                    <div class="col-md-12">
+                        <input type="checkbox" class="check" name="" value="1" id=""> Cheaper Service
+                        <!--<img src="/imagenes/Beat.png" alt="..." class="imgRedonda-off" id="beat-imagen"  onclick="checkCuentas(1)">-->
+                    </div>
+                    
+                    <br>
+                    <div class="col-md-12">
+                        <input type="checkbox" class="check" name="" value="2" id=""> Nearest Driver
+                        <!--<img src="/imagenes/uber.png" alt="..."  class="imgRedonda-off" id="uber-imagen" onclick="checkCuentas(2)" >-->
+                    </div>
+                    <div class="col-md-12">
+                            <input type="checkbox" class="check" name="" value="2" id=""> shortest route
+                            <!--<img src="/imagenes/uber.png" alt="..."  class="imgRedonda-off" id="uber-imagen" onclick="checkCuentas(2)" >-->
+                        </div>
+
+                </div>
+                <br>
+                <center>
+                        Amount Of Services:
+                </center>
+                <br>
+               
+                
+                <div class="row">
+                        <br>
+                        <div class="col-md-4">
+                            <input type="checkbox" class="check" name="Tcuenta" value="1" id="beat"> One Driver
+                            <!--<img src="/imagenes/Beat.png" alt="..." class="imgRedonda-off" id="beat-imagen"  onclick="checkCuentas(1)">-->
+                        </div>
+                        <div class="col-md-4">
+                            <input type="checkbox" class="check" name="Tcuenta" value="2" id="uber"> Two Drivers
+                            <!--<img src="/imagenes/uber.png" alt="..."  class="imgRedonda-off" id="uber-imagen" onclick="checkCuentas(2)" >-->
+                        </div>
+                        <div class="col-md-4">
+                            <input type="checkbox" class="check" name="Tcuenta" value="3" id="didi"> Three Drivers
+                            <!--<img src="/imagenes/Didi.png" alt="..." class="imgRedonda-off" id="didi-imagen" onclick="checkCuentas(3)">-->
+                        </div>
+
+                    </div>
+                      
+
+            </form>
+        </div>
+        <div class="container-fluid" style="width: 75%; height: 60%;float: left; border:black; 
+         border-style: solid; position: absolute; top:15%;">
+            <div class="main-panel">
+                <div id="map" style="width: 100%; height: 100%;"></div>
+            </div>
+        </div>
+        <div class="container-fluid" style="width: 55%; height: 25%;float: left; border:black; 
+         border-style: solid; position: absolute;
+        left:20%; top: 75%;">
+            Estado De Solicitud del servicio: 
+        </div>
     </div>
     <script>
         var map = L.map('map').setView([4.701979, -74.129346], 13);

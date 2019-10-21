@@ -42,14 +42,14 @@ app = (function () {
         location.href = "loginUser.html";
     }
     var cargarDatos = function (data) {
-        /*console.log(console.log(sessionStorage.getItem('email')))
+        console.log(console.log(sessionStorage.getItem('email')))
         if (sessionStorage.getItem('email') == null ){
             alert("Permiso denegado, debe logearse primero.")
             location.href = "/loginUser.html"
         }else{
             apiclient.consultarUsuario(sessionStorage.getItem('email'), sessionStorage.getItem('token'), actualizarPerfil)
-        }*/
-        apiclient.consultarUsuario(sessionStorage.getItem('email'), sessionStorage.getItem('token'), actualizarPerfil)
+        }
+       
 
     }
     var actualizarPerfil = function (funcion) {

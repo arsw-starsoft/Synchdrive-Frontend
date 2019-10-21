@@ -17,12 +17,18 @@ appMapa = (function () {
 
     return {
         getCordenadas:function(name){
-            var options = {
-                enableHighAccuracy: true,
-                timeout: 6000,
-                maximumAge: 0
-              };
-            return navigator.geolocation.getCurrentPosition(cordenadaSuccess, cordenadasError, options);
+            if (sessionStorage.getItem('email') == null ){
+                alert("Permiso denegado, debe logearse primero.")
+                location.href = "/loginUser.html"
+            }else{
+                var options = {
+                    enableHighAccuracy: true,
+                    timeout: 6000,
+                    maximumAge: 0
+                  };
+                return navigator.geolocation.getCurrentPosition(cordenadaSuccess, cordenadasError, options);
+            }
+            
         }
        
 
