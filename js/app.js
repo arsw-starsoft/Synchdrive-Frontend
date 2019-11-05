@@ -58,7 +58,6 @@ app = (function () {
             ch=document.getElementById(chk[i]["name"]);
             ch.checked=1
         }
-        console.log(funcion)
         $("#UserName").val(funcion["userName"]);
         $("#Email").val(funcion["email"]);
         $("#FirstName").val(funcion["firstName"]);
