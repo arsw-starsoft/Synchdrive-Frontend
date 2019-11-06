@@ -80,6 +80,7 @@ app = (function () {
             if(chk[i].checked){
                 elemento={"name":chk[i].id}
                 list.push(elemento)
+                console.log(chk[i].id)
             }
                
         }

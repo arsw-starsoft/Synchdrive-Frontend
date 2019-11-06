@@ -23,9 +23,12 @@
     <!--Custom styles-->
     <link href="css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet" />
     <link href="css/cuentas.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
     <script src="/js/app.js"></script>
     <script src="/js/apiClient.js"></script>
     <script src="/js/appMapa.js"></script>
+    <script src="/js/appService.js"></script>
 </head>
 
 <body onload="appMapa.getCordenadas()">
@@ -68,7 +71,7 @@
                 <center>
                     Destination: <input type="text">
                     <input type="button" value="Search Service" class="btn float-none login_btn"
-                        onclick="appMapa.esperandoServicios()">
+                        onclick="appService.sendMensaje()">
                 </center>
             </form>
 
@@ -133,7 +136,7 @@
         left:20%; top: 75%;">
             <div id="estadoService">
             </div>
-            <div id="cancelarservice" >
+            <div id="cancelarservice">
             </div>
         </div>
     </div>
