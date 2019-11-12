@@ -6,7 +6,7 @@ html,body{
 .formulario .checkbox label {
   display: inline-block;
   cursor: pointer;
-  color: #FF4136;
+  color: #1C0B71;
   position: relative;
   padding: 5px 15px 5px 35px;
   font-size: 1em;
@@ -27,14 +27,14 @@ html,body{
     left: 15px;
     border-radius: 50%;
     background: none;
-    border: 3px solid #FF4136; }
+    border: 3px solid #1C0B71; }
 .formulario input[type="radio"] {
   display: none; }
   .formulario input[type="radio"]:checked + label:before {
     display: none; }
   .formulario input[type="radio"]:checked + label {
     padding: 5px 15px;
-    background: #FF4136;
+    background: #1C0B71;
     border-radius: 2px;
     color: #fff; }
 .formulario .checkbox label:before {
@@ -44,7 +44,7 @@ html,body{
   .formulario .checkbox input[type="checkbox"]:checked + label:before {
     display: none; }
   .formulario .checkbox input[type="checkbox"]:checked + label {
-    background: #FF4136;
+    background: #1C0B71;
     color: #fff;
     padding: 5px 15px; }
 
@@ -62,7 +62,7 @@ html,body{
       position: absolute;
       top: 50%;
       left: 50%;
-      border: 5px solid #fff;
+      border: 5px solid black;
       border-radius: 100%;
     }
     
@@ -78,7 +78,7 @@ html,body{
       margin: -20px 0 0 -20px;
       height: 40px;
       width: 40px;
-      border-top-color: #e16971;
+      border-top-color: #1C0B71;
       animation: loading 2s infinite linear;
     }
     
@@ -86,14 +86,14 @@ html,body{
       margin: -10px 0 0 -10px;
       height: 20px;
       width: 20px;
-      border-top-color: #941e25;
+      border-top-color: #1C0B71;
       animation: loading 1s infinite linear;
     }
     #cancelService{
       top:70%;
       left:80%;
       position: absolute;
-      background: #941e25;
+      background: #1C0B71;
       color: #fff;
       border-color: black;
     }

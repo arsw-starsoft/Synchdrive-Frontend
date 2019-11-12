@@ -1,9 +1,13 @@
 html,body{
-    
+    background-image: url('/imagenes/fondomapa.jpg');
+   
+}
+label{
+    color: aliceblue;
+    font-weight: bold;
 }
 .sidebar{
     background-image: url('/imagenes/fondo.gif');
-    
 }
 .img-circle-off{
     width: 30%;

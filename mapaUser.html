@@ -22,7 +22,7 @@
         integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <!--Custom styles-->
     <link href="css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet" />
-    <link href="css/cuentas.css" rel="stylesheet" />
+    <link href="css/pageMap.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
     <script src="/js/app.js"></script>
@@ -69,10 +69,11 @@
             <form>
                 <br>
                 <center>
-                    Destination: <input type="text">
-                    <input type="button" value="Search Service" class="btn float-none login_btn"
-                        onclick="appService.sendMensaje()">
+                    <label>Destination:</label> <input id="Destination" type="text">
+                    <input type="button" id="bucarServicio" value="Search Service" class="btn float-none login_btn"
+                        onclick="appService.connectAndSubscribeUser()">
                 </center>
+
             </form>
 
         </div>
@@ -84,12 +85,13 @@
 
             <br>
             <center>
-                Select Filters:
+                <label>Select Filters:</label>
+
             </center>
 
             <br>
             <center>
-                Application:
+                <label>Application:</label>
                 <form action="" class="formulario">
                     <div class="checkbox" id="aplicaciones">
                         <!--<input type="checkbox" name="checkbox" id="checkbox1" >
@@ -104,7 +106,7 @@
 
             <br>
             <center>
-                Service:
+                <label>Service:</label>
             </center>
             <br>
             <form action="" class="formulario">
@@ -115,7 +117,8 @@
             </form>
             <br>
             <center>
-                Amount Of Services:
+                <label> Amount Of Services:</label>
+
             </center>
             <br>
             <form action="" class="formulario">

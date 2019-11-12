@@ -78,6 +78,7 @@ appMapa = (function () {
     }
     var cancelarBusqueda=function(){
         elementos='';
+        appService.cancelService();
         $("#estadoService").html(elementos)
         $("#cancelarservice").html(elementos)
     }
@@ -93,7 +94,7 @@ appMapa = (function () {
                     maximumAge: 0
                 };
                 apiclient.consultarUsuario(sessionStorage.getItem('email'), sessionStorage.getItem('token'), menu)
-                appService.connectAndSubscribeUser();
+                //appService.connectAndSubscribeUser();
                 return navigator.geolocation.getCurrentPosition(cordenadaSuccess, cordenadasError, options);
             }
 

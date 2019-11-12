@@ -20,6 +20,7 @@ appService = (function () {
 
     }
     var stompClient = null;
+    
     //Se conecta a el usuario a stomp
     var connectAndSubscribeUser = function () {
         console.log("Connecting to WS...");
@@ -31,13 +32,42 @@ appService = (function () {
                 var object = JSON.parse(eventBody.body);
                 console.log(object);
             });
+            appService.sendMensaje();
         });
         appMapa.esperandoServicios();
-        //appService.sendMensaje();
     };
+    var cancelService=function(){
+        $('#bucarServicio').prop('disabled',false)
+        $('#Destination').prop('disabled', false);
+        var list=$("input[type=radio]");
+        list.map(function(f){
+            console.log( '"#'+list[f].id+'"');
+            $('#'+list[f].id).prop('disabled', false);
+        });
+        list=$("input[type=checkbox]");
+        list.map(function(f){
+            console.log( '"#'+list[f].id+'"');
+            $('#'+list[f].id).prop('disabled', false);
+        });
+        stompClient=null
+    }
     var sendMensaje=function(){
         apiclient.consultarUsuario(sessionStorage.getItem('email'), sessionStorage.getItem('token'), publishService);
-    }
+        console.log('---------------------------------------')
+        $('#bucarServicio').prop('disabled',true)
+        $('#Destination').prop('disabled', true);
+        console.log($("input[type=radio]"))
+        var list=$("input[type=radio]");
+        list.map(function(f){
+            console.log( '"#'+list[f].id+'"');
+            $('#'+list[f].id).prop('disabled', true);
+        });
+        list=$("input[type=checkbox]");
+        list.map(function(f){
+            console.log( '"#'+list[f].id+'"');
+            $('#'+list[f].id).prop('disabled', true);
+        });
+    }    
 
     //El usuario publica en el topico x
     var publishService = function (customer) {
@@ -71,7 +101,8 @@ appService = (function () {
     return {
         connectAndSubscribeUser : connectAndSubscribeUser,
         publishService: publishService,
-        sendMensaje:sendMensaje
+        sendMensaje:sendMensaje,
+        cancelService:cancelService
     }
 
 })();
