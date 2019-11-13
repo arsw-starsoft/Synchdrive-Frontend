@@ -11,11 +11,12 @@ appService = (function () {
         }
     }
     class Service {
-        constructor(price, duration, distance, customer) {
+        constructor(price, duration, distance, customer,active) {
             this.price = price;
             this.duration = duration;
             this.distance = distance;
             this.customer = customer;
+            this.active = active;
         }
 
     }
@@ -82,22 +83,15 @@ appService = (function () {
         });
         console.log(customer)
         var customer = new Customer(customer.email,customer.firstName,customer.lastName,customer.userName,customer.cellPhone,customer.password,appsActivas);
-        var service = new Service(null,null,null,customer);
+        var service = new Service(null,null,null,customer,true);
         console.log(service);
         console.log(stompClient);
         var listApps = customer.apps;
         console.log(listApps)
-        listApps.sort(function (n1,n2) {
-            return n1 > n2;
-        }); //Ordenar para el back message
-        var stringMessage = "";
-        listApps.forEach(function (app) {
-            stringMessage += "." + app.name.toLowerCase();
-        });
-        console.log(stringMessage);
-        stompClient.send("/app/services" + stringMessage, {}, JSON.stringify(service));
+        console.log(service);
+        console.log(stompClient);
+        stompClient.send("/app/services", {}, JSON.stringify(service));
     };
-
     return {
         connectAndSubscribeUser : connectAndSubscribeUser,
         publishService: publishService,
