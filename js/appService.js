@@ -11,17 +11,18 @@ appService = (function () {
         }
     }
     class Service {
-        constructor(price, duration, distance, customer,active) {
+        constructor(price, duration, distance, customer, active, idPeticion, destino) {
             this.price = price;
             this.duration = duration;
             this.distance = distance;
             this.customer = customer;
             this.active = active;
+            this.idPeticion = idPeticion;
+            this.destino = destino;
         }
-
     }
     var stompClient = null;
-    
+
     //Se conecta a el usuario a stomp
     var connectAndSubscribeUser = function () {
         console.log("Connecting to WS...");
@@ -37,43 +38,43 @@ appService = (function () {
         });
         appMapa.esperandoServicios();
     };
-    var cancelService=function(){
-        $('#bucarServicio').prop('disabled',false)
+    var cancelService = function () {
+        $('#bucarServicio').prop('disabled', false)
         $('#Destination').prop('disabled', false);
-        var list=$("input[type=radio]");
-        list.map(function(f){
-            console.log( '"#'+list[f].id+'"');
-            $('#'+list[f].id).prop('disabled', false);
+        var list = $("input[type=radio]");
+        list.map(function (f) {
+            console.log('"#' + list[f].id + '"');
+            $('#' + list[f].id).prop('disabled', false);
         });
-        list=$("input[type=checkbox]");
-        list.map(function(f){
-            console.log( '"#'+list[f].id+'"');
-            $('#'+list[f].id).prop('disabled', false);
+        list = $("input[type=checkbox]");
+        list.map(function (f) {
+            console.log('"#' + list[f].id + '"');
+            $('#' + list[f].id).prop('disabled', false);
         });
-        stompClient=null
+        stompClient = null
     }
-    var sendMensaje=function(){
+    var sendMensaje = function () {
         apiclient.consultarUsuario(sessionStorage.getItem('email'), sessionStorage.getItem('token'), publishService);
         console.log('---------------------------------------')
-        $('#bucarServicio').prop('disabled',true)
+        $('#bucarServicio').prop('disabled', true)
         $('#Destination').prop('disabled', true);
         console.log($("input[type=radio]"))
-        var list=$("input[type=radio]");
-        list.map(function(f){
-            console.log( '"#'+list[f].id+'"');
-            $('#'+list[f].id).prop('disabled', true);
+        var list = $("input[type=radio]");
+        list.map(function (f) {
+            console.log('"#' + list[f].id + '"');
+            $('#' + list[f].id).prop('disabled', true);
         });
-        list=$("input[type=checkbox]");
-        list.map(function(f){
-            console.log( '"#'+list[f].id+'"');
-            $('#'+list[f].id).prop('disabled', true);
+        list = $("input[type=checkbox]");
+        list.map(function (f) {
+            console.log('"#' + list[f].id + '"');
+            $('#' + list[f].id).prop('disabled', true);
         });
-    }    
+    }
 
     //El usuario publica en el topico x
     var publishService = function (customer) {
         console.log("Publishing....");
-        var appsActivas=[];
+        var appsActivas = [];
         customer.apps.map(function (f) {
             ch = document.getElementById(f.name);
             console.log(ch)
@@ -82,21 +83,34 @@ appService = (function () {
             }
         });
         console.log(customer)
-        var customer = new Customer(customer.email,customer.firstName,customer.lastName,customer.userName,customer.cellPhone,customer.password,appsActivas);
-        var service = new Service(null,null,null,customer,true);
-        console.log(service);
-        console.log(stompClient);
-        var listApps = customer.apps;
-        console.log(listApps)
-        console.log(service);
-        console.log(stompClient);
-        stompClient.send("/app/services", {}, JSON.stringify(service));
+        var customer = new Customer(customer.email, customer.firstName, customer.lastName, customer.userName, customer.cellPhone, customer.password, appsActivas);
+        var numeroServicios = 0;
+        if ($('#OneDriver').is(':checked')) {
+            numeroServicios = 1;
+        } if ($('#TwoDriver').is(':checked')) {
+            numeroServicios = 2;
+        } if ($('#ThreeDriver').is(':checked')) {
+            numeroServicios = 3;
+        }
+        for (var i = 1; i <= numeroServicios; i++) {
+            var service = new Service(null, null, null, customer, true, i, $('#Destination').value);
+            console.log(service);
+            console.log(stompClient);
+            var listApps = customer.apps;
+            console.log(listApps)
+            console.log(service);
+            console.log(stompClient);
+            stompClient.send("/app/services", {}, JSON.stringify(service));
+        }
+        
+
+
     };
     return {
-        connectAndSubscribeUser : connectAndSubscribeUser,
+        connectAndSubscribeUser: connectAndSubscribeUser,
         publishService: publishService,
-        sendMensaje:sendMensaje,
-        cancelService:cancelService
+        sendMensaje: sendMensaje,
+        cancelService: cancelService
     }
 
 })();
