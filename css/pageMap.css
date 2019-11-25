@@ -1,6 +1,5 @@
 html,body{
-    background-image: url('/imagenes/fondomapa.jpg');
-   
+    background-color:black;
 }
 label{
     color: aliceblue;

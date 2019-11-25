@@ -21,20 +21,34 @@ appService = (function () {
             this.destino = destino;
         }
     }
+    var customerC = null;
     var stompClient = null;
-
+    var webSocketActive = [];
+    var servicios = [];
     //Se conecta a el usuario a stomp
     var connectAndSubscribeUser = function () {
         console.log("Connecting to WS...");
         var socket = new SockJS("https://synchdrive.herokuapp.com/stompendpoint");
         stompClient = Stomp.over(socket);
+
         stompClient.connect({}, function (frame) {
             console.log("Connected: " + frame);
             stompClient.subscribe("/topic/services.users", function (eventBody) {
                 var object = JSON.parse(eventBody.body);
                 console.log(object);
             });
+            stompClient.subscribe("/topic/accepted", function (eventBody) {
+                var object = JSON.parse(eventBody.body);
+                appService.webSocketActive = [];
+                object.forEach(function (obj) {
+                    appService.webSocketActive.push(obj);
+                })
+                //console.log( appService.webSocketActive)
+                appEnServicio.ServiciosAceptados();
+
+            });
             appService.sendMensaje();
+
         });
         appMapa.esperandoServicios();
     };
@@ -70,9 +84,37 @@ appService = (function () {
             $('#' + list[f].id).prop('disabled', true);
         });
     }
+    var publishServicefiltros = function (f) {
+        list=[];
+        list.push(f)
+        customer= appService.customerC;
+        customer.apps=list;
+        console.log(customer)
+        var numeroServicios = 0;
+            if ($('#OneDriver').is(':checked')) {
+                numeroServicios = 1;
+            } if ($('#TwoDriver').is(':checked')) {
+                numeroServicios = 2;
+            } if ($('#ThreeDriver').is(':checked')) {
+                numeroServicios = 3;
+            }
+            for (var i = 1; i <= numeroServicios; i++) {
+                console.log($('#Destination').value)
+                var service = new Service(null, null, null, customer, true, i, $('#Destination').val());
+                console.log(service);
+                console.log(stompClient);
+                var listApps = customer.apps;
+                console.log(listApps)
+                console.log(service);
+                console.log(stompClient);
+                appService.servicios.push(service)
+                stompClient.send("/app/services", {}, JSON.stringify(service));
+            }
+    }
 
     //El usuario publica en el topico x
     var publishService = function (customer) {
+        appService.servicios = [];
         console.log("Publishing....");
         var appsActivas = [];
         customer.apps.map(function (f) {
@@ -82,35 +124,71 @@ appService = (function () {
                 appsActivas.push(f)
             }
         });
+        console.log("entreeeeeee")
+        //console.log(apiclient.consultarAplicacionMasBarata($('#Destination').val(),"uber-didi",sessionStorage.getItem('token'),appService.filtros))
+        console.log("entreeeeeee")
         console.log(customer)
+
         var customer = new Customer(customer.email, customer.firstName, customer.lastName, customer.userName, customer.cellPhone, customer.password, appsActivas);
-        var numeroServicios = 0;
-        if ($('#OneDriver').is(':checked')) {
-            numeroServicios = 1;
-        } if ($('#TwoDriver').is(':checked')) {
-            numeroServicios = 2;
-        } if ($('#ThreeDriver').is(':checked')) {
-            numeroServicios = 3;
+        appService.customerC = customer;
+
+        if (appsActivas.length > 1 && $('#CheaperService').is(':checked')) {
+            aplicacionesEnviar = ""
+            destinoT=""
+            for (var i = 0; i < appsActivas.length; i++) {
+                if (i == appsActivas.length - 1) {
+                    aplicacionesEnviar += appsActivas[i].name
+                } else {
+                    aplicacionesEnviar+=appsActivas[i].name+"-"
+                }
+            }
+            destino=$('#Destination').val().split(" ")
+            for (var i = 0; i < destino.length; i++) {
+                if (i == destino.length - 1) {
+                    destinoT += destino[i]
+                } else {
+                    destinoT+=destino[i]+"-"
+                }
+            }
+            aplicacionesEnviar=aplicacionesEnviar.toLowerCase()
+            console.log(aplicacionesEnviar)
+            console.log(destinoT)
+            apiclient.consultarAplicacionMasBarata(destinoT, aplicacionesEnviar, sessionStorage.getItem('token'), appService.publishServicefiltros)
         }
-        for (var i = 1; i <= numeroServicios; i++) {
-            var service = new Service(null, null, null, customer, true, i, $('#Destination').value);
-            console.log(service);
-            console.log(stompClient);
-            var listApps = customer.apps;
-            console.log(listApps)
-            console.log(service);
-            console.log(stompClient);
-            stompClient.send("/app/services", {}, JSON.stringify(service));
-        }
-        
+        else {
+            var numeroServicios = 0;
+            if ($('#OneDriver').is(':checked')) {
+                numeroServicios = 1;
+            } if ($('#TwoDriver').is(':checked')) {
+                numeroServicios = 2;
+            } if ($('#ThreeDriver').is(':checked')) {
+                numeroServicios = 3;
+            }
+            for (var i = 1; i <= numeroServicios; i++) {
+                console.log($('#Destination').value)
+                var service = new Service(null, null, null, customer, true, i, $('#Destination').val());
+                console.log(service);
+                console.log(stompClient);
+                var listApps = customer.apps;
+                console.log(listApps)
+                console.log(service);
+                console.log(stompClient);
+                appService.servicios.push(service)
+                stompClient.send("/app/services", {}, JSON.stringify(service));
+            }
 
 
+        }
     };
     return {
         connectAndSubscribeUser: connectAndSubscribeUser,
         publishService: publishService,
         sendMensaje: sendMensaje,
-        cancelService: cancelService
+        cancelService: cancelService,
+        webSocketActive: webSocketActive,
+        servicios: servicios,
+        publishServicefiltros: publishServicefiltros,
+        customerC: customerC
     }
 
 })();

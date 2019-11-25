@@ -47,9 +47,7 @@ appMapa = (function () {
             elementos = '<input type="radio" name="servicios" id="CheaperService">' +
                 '<label for="CheaperService">Cheaper Service</label>' +
                 '<input type="radio" name="servicios" id="NearestDriver">' +
-                '<label for="NearestDriver">Nearest Driver</label>' +
-                '<input type="radio" name="servicios" id="shortestRoute">' +
-                '<label for="shortestRoute">Shortest Route</label>';
+                '<label for="NearestDriver">Nearest Driver</label>';
             $("#typeservices").html(elementos)
 
         }

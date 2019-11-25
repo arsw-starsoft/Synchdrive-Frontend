@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>User History</title>
+    <link href="css/map.css" rel="stylesheet" />
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+        integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+        crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin="">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--Made with love by Mutiullah Samim -->
+    <!--Bootsrap 4 CDN-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!--Fontawesome CDN-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <!--Custom styles-->
+    <link href="css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet" />
+    <link href="css/pageMap.css" rel="stylesheet" />
+    <link href="css/map.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/apiClient.js"></script>
+    <script src="/js/appMapa.js"></script>
+    <script src="/js/appService.js"></script>
+    <script src="/js/historial.js"></script>
+</head>
+
+<body onload="appHistorial.cargarHistorial()">
+    <div class="wrapper">
+        <div class="sidebar" data-image="../imagenes/conductor.png">
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    <a href="" class="simple-text">
+                    </a>
+                </div>
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/perfilUser.html">
+                            <i class="fas fa-user"></i>
+                            <p>Driver Profile</p>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/mapaUser.html">
+                            <i class="fa fa-map-marker"></i>
+                            <p>Maps</p>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/history.html">
+                            <i class="fab fa-audible"></i>
+                            <p>My History</p>
+                        </a>
+                    </li>
+                    <li class="nav-item active active-pro">
+                        <a class="nav-link active" href="">
+                            <i class="fas fa-user"></i>
+                            <p>Log out</p>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="container-fluid" style="width: 75%; 
+        height: 100%;float: left; border:wheat;  
+        border-style: solid;
+        position: absolute ; left: 21%; font-weight:bold;">
+            <div class="container" id="panel-date">
+                <div class="form-group col-8" id="getResult7">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table style="width:100%; color: aliceblue;" id="table" class="table" paginator="true" paginatorPosition="top"
+                                rows="5">
+                                <tr>
+                                    <th>Id Service</th>
+                                    <th>Application</th>
+                                    <th>Driver</th>
+                                    <th> destination</th>
+                                    <th>Price</th>
+                                </tr>
+                                <tbody id="cuerpo"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+</body>
+<!--   Core JS Files   -->
+
+</html>
