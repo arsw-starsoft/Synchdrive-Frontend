@@ -1,5 +1,5 @@
 appMapa = (function () {
-    var apps;
+    var apps=[];
     var cordenadaSuccess = function (position) {
         var coordenadas = position.coords;
         console.log('Tu posición actual es:');
@@ -22,12 +22,13 @@ appMapa = (function () {
         apps = funcion.apps;
         funcion.apps.map(function (f) {
             console.log(f)
-            elementos += '<input type="checkbox" name="checkbox' + cont + '"id="' + f.name + '"onclick="appMapa.comprobarServicios()">' +
+            elementos += '<input type="checkbox" name="checkbox' + cont + '"id="' + f.name + '"onclick="appMapa.comprobarServicios()" checked>' +
                 '<label for="' + f.name + '">' + f.name + '</label>';
             cont += 1;
 
         });
         $("#aplicaciones").html(elementos)
+        appMapa.comprobarServicios()
         menuNservices()
     };
     var comprobarServicios = function () {
@@ -47,7 +48,9 @@ appMapa = (function () {
             elementos = '<input type="radio" name="servicios" id="CheaperService">' +
                 '<label for="CheaperService">Cheaper Service</label>' +
                 '<input type="radio" name="servicios" id="NearestDriver">' +
-                '<label for="NearestDriver">Nearest Driver</label>';
+                '<label for="NearestDriver">Nearest Driver</label>'+
+                '<input type="radio" name="servicios" id="allServices" checked>' +
+                '<label for="allServices">All Services</label>';
             $("#typeservices").html(elementos)
 
         }
@@ -55,7 +58,7 @@ appMapa = (function () {
     var menuNservices = function () {
         var elementos = "";
 
-        elementos = ' <input type="radio" name="NServices" id="OneDriver">' +
+        elementos = ' <input type="radio" name="NServices" id="OneDriver" checked>' +
             '<label for="OneDriver">One Driver</label>' +
             '<input type="radio" name="NServices" id="TwoDriver">' +
             '<label for="TwoDriver">Two Driver</label>' +
@@ -100,7 +103,8 @@ appMapa = (function () {
         menu: menu,
         comprobarServicios: comprobarServicios,
         esperandoServicios: esperandoServicios,
-        cancelarBusqueda:cancelarBusqueda
+        cancelarBusqueda:cancelarBusqueda,
+        apps:apps
     }
 
 })();

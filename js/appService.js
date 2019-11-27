@@ -26,6 +26,32 @@ appService = (function () {
     var webSocketActive = [];
     var servicios = [];
     //Se conecta a el usuario a stomp
+    var verificar=function(f){
+        var num = 0;
+        console.log(appMapa.apps)
+        f.apps.map(function (f) {
+            ch = document.getElementById(f.name);
+            console.log(ch)
+            if (ch.checked == 1) {
+                num += 1;
+                console.log(num)
+            }
+        });
+        if(num<1){
+            alert(" please select an application")
+        }else{
+            appService.connectAndSubscribeUser()
+        }
+    }
+    var conecction =function(){
+        if($('#Destination').val().length==0){
+            alert("Please enter destination")
+        }else{
+            apiclient.consultarUsuario(sessionStorage.getItem('email'), sessionStorage.getItem('token'), appService.verificar)
+        }
+        
+        
+    }
     var connectAndSubscribeUser = function () {
         console.log("Connecting to WS...");
         var socket = new SockJS("https://synchdrive.herokuapp.com/stompendpoint");
@@ -188,7 +214,9 @@ appService = (function () {
         webSocketActive: webSocketActive,
         servicios: servicios,
         publishServicefiltros: publishServicefiltros,
-        customerC: customerC
+        customerC: customerC,
+        conecction:conecction,
+        verificar:verificar
     }
 
 })();
