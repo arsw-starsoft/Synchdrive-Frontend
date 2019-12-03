@@ -25,6 +25,7 @@ appService = (function () {
     var stompClient = null;
     var webSocketActive = [];
     var servicios = [];
+    var enServicio=false;
     //Se conecta a el usuario a stomp
     var verificar=function(f){
         var num = 0;
@@ -53,6 +54,7 @@ appService = (function () {
         
     }
     var connectAndSubscribeUser = function () {
+        appService.enServicio=true;
         console.log("Connecting to WS...");
         var socket = new SockJS("https://synchdrive.herokuapp.com/stompendpoint");
         stompClient = Stomp.over(socket);
@@ -97,6 +99,7 @@ appService = (function () {
             $('#' + list[f].id).prop('disabled', false);
         });
         stompClient.send("/topic/canceled", {}, JSON.stringify(appService.servicios[0].customer));
+        appService.enServicio=false;
         stompClient = null;
        
     }
@@ -223,7 +226,8 @@ appService = (function () {
         publishServicefiltros: publishServicefiltros,
         customerC: customerC,
         conecction:conecction,
-        verificar:verificar
+        verificar:verificar,
+        enServicio:enServicio
     }
 
 })();
