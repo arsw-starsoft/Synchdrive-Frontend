@@ -71,8 +71,13 @@ appService = (function () {
                 })
                 //console.log( appService.webSocketActive)
                 appEnServicio.ServiciosAceptados();
-
             });
+            stompClient.subscribe("/topic/canceled", function (eventBody) {
+                var object = JSON.parse(eventBody.body);
+                console.log(object);
+               
+            });
+
             appService.sendMensaje();
 
         });
@@ -91,7 +96,9 @@ appService = (function () {
             console.log('"#' + list[f].id + '"');
             $('#' + list[f].id).prop('disabled', false);
         });
-        stompClient = null
+        stompClient.send("/topic/canceled", {}, JSON.stringify(appService.servicios[0].customer));
+        stompClient = null;
+       
     }
     var sendMensaje = function () {
         apiclient.consultarUsuario(sessionStorage.getItem('email'), sessionStorage.getItem('token'), publishService);
