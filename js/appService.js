@@ -79,6 +79,11 @@ appService = (function () {
                 console.log(object);
                
             });
+            stompClient.subscribe("/topic/acpp", function (eventBody) {
+                var object = JSON.parse(eventBody.body);
+                console.log(eventBody.body);
+                
+            });
 
             appService.sendMensaje();
 

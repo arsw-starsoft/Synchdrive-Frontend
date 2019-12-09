@@ -1,6 +1,12 @@
 appHistorial = (function () {
     var cargarHistorial=function(){
-        apiclient.consultarHistorial(sessionStorage.getItem('email'), sessionStorage.getItem('token'),appHistorial.generarTabla)
+        if (sessionStorage.getItem('email') == null) {
+            alert("Permiso denegado, debe logearse primero.")
+            location.href = "/loginUser.html"
+        }else{
+            apiclient.consultarHistorial(sessionStorage.getItem('email'), sessionStorage.getItem('token'),appHistorial.generarTabla)
+        }
+        
     }
     var generarTabla=function(ft){
         

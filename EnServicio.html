@@ -21,21 +21,25 @@
     <script src="/js/check.js"></script>
     <script src="/js/app.js"></script>
     <script src="/js/apiClient.js"></script>
+    <script src="/js/appEnServicio.js"></script>
 </head>
 
-<body>
+<body onload="appEnServicio.cargarInformacion()">
     <div class="container">
         <div class="d-flex justify-content-center h-50">
             <form>
+                <div id="informacion">
+
+                </div>
                 <div class="row align-items-center remember">
-                        <input type="button" value="Finish Service" class="btn float-none login_btn"  
+                    <input type="button" value="Finish Service" class="btn float-none login_btn"
                         style='position: absolute;top:43.5%;left: 43.5%;font-size: 120%; width: 15%;height: 15%;'
-                        onclick="location.href='/mapaUser.html'"></input>  
+                        onclick="location.href='/mapaUser.html'"></input>
                 </div>
             </form>
 
         </div>
-        
+
     </div>
 </body>
 
