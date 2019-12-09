@@ -52,6 +52,7 @@ appMapa = (function () {
                 '<input type="radio" name="servicios" id="allServices" checked>' +
                 '<label for="allServices">All Services</label>';
             $("#typeservices").html(elementos)
+            $('#NearestDriver').prop('disabled', true);
 
         }
     };
@@ -65,6 +66,7 @@ appMapa = (function () {
             ' <input type="radio" name="NServices" id="ThreeDriver">' +
             ' <label for="ThreeDriver">Three Driver</label>';
         $("#nservices").html(elementos)
+        $('#NearestDriver').prop('disabled', true);
     }
     var esperandoServicios = function () {
         elementos = '<div class="loading first">' +
@@ -82,6 +84,7 @@ appMapa = (function () {
         appService.cancelService();
         $("#estadoService").html(elementos)
         $("#cancelarservice").html(elementos)
+        $('#NearestDriver').prop('disabled', true);
     }
     return {
         getCordenadas: function (name) {
